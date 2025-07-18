@@ -6,15 +6,18 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <h1>"Guessing Game"</h1>
+    <div class="container">
+      <h1>Guessing Game</h1>
+      <input id="myInput" type="number" /><button id="checkBtn">Check</button>
+      <p id="result"></p>
 
-    <input id="myInput" type="number" /><button id="checkBtn">Check</button>
-    <p id="result">Result:</p>
-    <h3>Previous Guesses</h3>
-    <p id="prevGuess">Previous Guesses:</p>
-    <button id="hintsBtn">Hints</button>
-    <p id="hints">hints here</p>
+      <p><strong>Previous Guesses:</strong><span id="prevGuess"></span></p>
 
+      <button id="hintsBtn">Hints</button>
+      <p id="hints"></p>
+      <button id="playAgain">Play Again</button>
+      <p id="guessesLeft"></p>
+    </div>
     <script src="./js/guessing-game.js"></script>
   </body>
 </html>

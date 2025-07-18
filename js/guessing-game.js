@@ -39,7 +39,7 @@ class Game {
     }
     this.pastGuesses.push(this.playersGuess);
 
-    if (this.pastGuesses.length === 3) {
+    if (this.pastGuesses.length === 5) {
       return "You Lose.";
     }
     let difference = Math.abs(this.playersGuess - this.winningNumber);
@@ -70,27 +70,54 @@ function newGame() {
 
 let game = newGame();
 let myInput = document.getElementById("myInput"); //2
-
+document.getElementById("hintsBtn").disabled = true;
 //check
 let check = document.getElementById("checkBtn");
 check.addEventListener("click", () => {
+  //result
   let result = game.playersGuessSubmission(Number(myInput.value));
   let resultValue = document.getElementById("result");
 
   resultValue.innerText = result;
+
   //previous guesses
   let prevGuess = document.getElementById("prevGuess");
   prevGuess.innerText = game.pastGuesses.join(",");
+
+  //guessleft
+  let guessLeft = document.getElementById("guessesLeft");
+  let guessLeftVal = 5 - game.pastGuesses.length;
+  guessLeft.innerText = "You have " + guessLeftVal + " remaining!";
+  if (guessLeftVal == 2) {
+    document.getElementById("hintsBtn").disabled = false;
+  }
+
+  //disable check
+  if (result === "You Win!" || result === "You Lose.") {
+    check.disabled = true;
+  }
+  document.getElementById("myInput").value = "";
 });
 
 //Hints
-
-let myBtn = document.getElementById("hintsBtn");
+let myHint = document.getElementById("hintsBtn");
 
 let myHintsTxt = document.getElementById("hints");
 
-myBtn.addEventListener("click", () => {
+myHint.addEventListener("click", () => {
   const hints = game.provideHint();
   console.log("checking input", myInput.value);
   myHintsTxt.innerText = hints;
+});
+
+//play Again
+let playAgain = document.getElementById("playAgain");
+playAgain.addEventListener("click", () => {
+  game = newGame();
+  document.getElementById("myInput").value = "";
+  document.getElementById("prevGuess").innerText = "";
+  document.getElementById("hints").innerText = "";
+  document.getElementById("result").innerText = "";
+  document.getElementById("guessesLeft").innerText = "";
+  document.getElementById("checkBtn").disabled = false;
 });
